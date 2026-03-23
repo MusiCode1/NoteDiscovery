@@ -1891,6 +1891,7 @@ function noteApp() {
                         ondrop="window.$root.handleFolderDrop(this, event)"
                         onclick="window.$root.handleFolderClick(this)"
                         class="folder-item hover-accent px-2 py-1 text-sm relative"
+                        dir="auto"
                         style="color: var(--text-primary); cursor: pointer;"
                     >
                         <div class="flex items-center gap-1">
@@ -1991,6 +1992,7 @@ function noteApp() {
                     ondragend="window.$root.onItemDragEnd()"
                     onclick="window.$root.handleItemClick(this)"
                     class="note-item px-2 py-1 text-sm relative"
+                    dir="auto"
                     style="${isCurrent ? 'background-color: var(--accent-light); color: var(--accent-primary);' : 'color: var(--text-primary);'} ${isMediaFile ? 'opacity: 0.85;' : ''} cursor: pointer;"
                     onmouseover="window.$root.handleItemHover(this, true)"
                     onmouseout="window.$root.handleItemHover(this, false)"
