@@ -484,6 +484,7 @@ def generate_export_html(
             font-size: 0.875rem;
             font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
             font-weight: 500;
+            direction: ltr;
         }}
         
         /* Code blocks */
@@ -493,6 +494,7 @@ def generate_export_html(
             border-radius: 0.5rem;
             overflow-x: auto;
             border: 1px solid var(--border-primary, #e1e4e8);
+            direction: ltr;
         }}
         
         .markdown-preview pre code {{
@@ -695,8 +697,9 @@ def generate_export_html(
         const safeHtml = DOMPurify.sanitize(rawHtml);
         document.getElementById('content').innerHTML = safeHtml;
         
-        // Add copy buttons to code blocks
+        // Add copy buttons to code blocks and ensure LTR direction
         document.querySelectorAll('.markdown-preview pre').forEach(pre => {{
+            pre.dir = 'ltr';
             const btn = document.createElement('button');
             btn.className = 'copy-btn';
             btn.textContent = 'Copy';

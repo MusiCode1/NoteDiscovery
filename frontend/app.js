@@ -972,6 +972,7 @@ function noteApp() {
                                 const parent = container.parentElement;
                                 if (parent && container.dataset.originalCode) {
                                     const pre = document.createElement('pre');
+                                    pre.dir = 'ltr';
                                     const code = document.createElement('code');
                                     code.className = 'language-mermaid';
                                     code.textContent = container.dataset.originalCode;
@@ -4283,6 +4284,9 @@ function noteApp() {
                             hljs.highlightElement(block);
                         }
                         
+                        // Ensure code blocks stay LTR regardless of document direction
+                        if (block.parentElement) block.parentElement.dir = 'ltr';
+                        
                         // Add copy button if not already present
                         const pre = block.parentElement;
                         if (pre && !pre.querySelector('.copy-code-button')) {
@@ -4367,6 +4371,7 @@ function noteApp() {
             
             // Style the pre element to be relative
             preElement.style.position = 'relative';
+            preElement.dir = 'ltr';
             
             // Show button on hover
             preElement.addEventListener('mouseenter', () => {
