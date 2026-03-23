@@ -122,9 +122,11 @@ _tag_cache: Dict[str, Tuple[float, List[str]]] = {}
 # request indexes in quick succession.
 
 _SCAN_WALK_CACHE_LOCK = threading.Lock()
-_SCAN_WALK_CACHE_TTL_SECONDS = 1.0
+_SCAN_WALK_CACHE_TTL_SECONDS = 5.0
 # key: (resolved_notes_dir, include_media) -> (cached_at_monotonic_seconds, (notes, folders))
 _SCAN_WALK_CACHE: Dict[Tuple[str, bool], Tuple[float, Tuple[List[Dict], List[str]]]] = {}
+# Prevents multiple threads from running the same scan concurrently
+_SCAN_IN_PROGRESS: Dict[Tuple[str, bool], threading.Event] = {}
 
 
 def _scan_cache_get(key: Tuple[str, bool]) -> Optional[Tuple[List[Dict], List[str]]]:
@@ -219,6 +221,23 @@ def scan_notes_fast_walk(notes_dir: str, use_cache: bool = True, include_media: 
                 _scan_cache_set(cache_key, normalized_value)
                 return normalized_value
 
+        # Coalesce concurrent scans: if another thread is already scanning
+        # the same key, wait for it instead of starting a duplicate scan.
+        with _SCAN_WALK_CACHE_LOCK:
+            if cache_key in _SCAN_IN_PROGRESS:
+                event = _SCAN_IN_PROGRESS[cache_key]
+            else:
+                event = None
+                _SCAN_IN_PROGRESS[cache_key] = threading.Event()
+
+        if event is not None:
+            # Another thread is scanning — wait for it, then return from cache
+            event.wait(timeout=30)
+            cached = _scan_cache_get(cache_key)
+            if cached is not None:
+                return cached
+            # If still no cache (timeout or error), fall through and scan ourselves
+
     notes: List[Dict] = []
     folders_set = set()
 
@@ -265,6 +284,11 @@ def scan_notes_fast_walk(notes_dir: str, use_cache: bool = True, include_media: 
     value = (sorted(notes, key=lambda x: x.get('modified', ''), reverse=True), sorted(folders_set))
     if use_cache:
         _scan_cache_set(cache_key, value)
+        # Signal waiting threads that this scan is done
+        with _SCAN_WALK_CACHE_LOCK:
+            event = _SCAN_IN_PROGRESS.pop(cache_key, None)
+        if event is not None:
+            event.set()
     return value
 
 def move_note(notes_dir: str, old_path: str, new_path: str) -> tuple[bool, str]:

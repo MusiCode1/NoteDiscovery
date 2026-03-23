@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials, APIKeyHeader
 from starlette.middleware.sessions import SessionMiddleware
 import asyncio
+from concurrent.futures import ThreadPoolExecutor
 import os
 import yaml
 import json
@@ -165,6 +166,10 @@ app = FastAPI(
     redoc_url=None,    # Disable ReDoc at /redoc
     openapi_tags=tags_metadata
 )
+
+# Increase the default thread pool for asyncio.to_thread() to handle
+# slow I/O (e.g. RCLONE-mounted filesystems) without exhausting threads.
+asyncio.get_event_loop().set_default_executor(ThreadPoolExecutor(max_workers=32))
 
 # CORS middleware configuration
 # Use config.yaml to control allowed origins (default: ["*"] for self-hosted simplicity)
