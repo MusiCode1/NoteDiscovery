@@ -1,0 +1,295 @@
+{
+  "_meta": {
+    "code": "he-IL",
+    "name": "עברית",
+    "flag": "🇮🇱",
+    "dir": "rtl"
+  },
+
+  "app": {
+    "tagline": "מאגר הידע האישי שלך"
+  },
+
+  "common": {
+    "save": "שמור",
+    "cancel": "ביטול",
+    "delete": "מחק",
+    "rename": "שנה שם",
+    "create": "צור",
+    "close": "סגור",
+    "yes": "✓ כן",
+    "no": "✗ לא",
+    "ok": "אישור",
+    "error": "שגיאה",
+    "loading": "טוען...",
+    "saved": "✓ נשמר",
+    "saving": "שומר...",
+    "copied": "הועתק!",
+    "copy_to_clipboard": "העתק ללוח",
+    "failed": "הפעולה {{action}} נכשלה. נסה שוב."
+  },
+
+  "sidebar": {
+    "title": "קבצים",
+    "favorites_title": "מועדפים",
+    "folders_and_notes": "תיקיות ופתקים",
+    "new_button": "+ חדש",
+    "new_note": "פתק חדש",
+    "new_folder": "תיקייה חדשה",
+    "new_from_template": "חדש מתבנית",
+    "search_placeholder": "חיפוש פתקים...",
+    "search_hint": "הקלד כדי לחפש בפתקים",
+    "clear_search": "נקה חיפוש",
+    "drag_hint": "💡 גרור=העבר",
+    "root_folder": "📂 תיקיית שורש",
+    "no_notes": "אין עדיין פתקים. צור את הפתק הראשון!",
+    "no_notes_yet": "אין עדיין פתקים או תיקיות.",
+    "create_first": "צור את הפתק או התיקייה הראשונים!",
+    "drop_to_root": "שחרר כאן לשורש",
+    "no_favorites": "אין עדיין מועדפים",
+    "no_results": "לא נמצאו תוצאות",
+    "expand_all": "הרחב את כל התיקיות",
+    "collapse_all": "כווץ את כל התיקיות",
+    "toggle_sidebar": "הצג/הסתר סרגל צד",
+    "go_to_homepage": "עבור לדף הבית",
+    "files": "קבצים",
+    "search": "חיפוש",
+    "search_title": "חיפוש",
+    "settings": "הגדרות",
+    "settings_title": "הגדרות",
+    "filtered_notes": "פתקים מסוננים"
+  },
+
+  "editor": {
+    "placeholder": "התחל לכתוב ב-Markdown...",
+    "drop_hint": "💡 שחרר כאן כדי להוסיף במיקום הסמן...",
+    "mode_edit": "עריכה",
+    "mode_split": "מפוצל",
+    "mode_preview": "תצוגה מקדימה",
+    "edited": "נערך {{time}}",
+    "just_now": "הרגע",
+    "minutes_ago": "לפני {{count}} דקות",
+    "hours_ago": "לפני {{count}} שעות",
+    "days_ago": "לפני {{count}} ימים"
+  },
+
+  "notes": {
+    "confirm_delete": "למחוק את \"{{name}}\"?",
+    "already_exists": "פתק בשם \"{{name}}\" כבר קיים במיקום זה.\nבחר שם אחר.",
+    "prompt_name": "הזן שם פתק:",
+    "prompt_name_in_folder": "יצירת פתק בתיקייה \"{{folder}}\".\nהזן שם פתק:",
+    "prompt_name_with_path": "הזן שם פתק (ניתן להשתמש בתיקייה/שם):",
+    "prompt_rename": "הזן שם חדש:",
+    "invalid_name": "שם פתק לא חוקי.",
+    "empty_name": "שם הפתק לא יכול להיות ריק.",
+    "not_found": "הפתק לא נמצא: {{path}}",
+    "create_from_link": "הפתק \"{{path}}\" לא קיים.\n\nהאם תרצה ליצור אותו?",
+    "no_content": "אין תוכן פתק לייצוא",
+    "open_first": "פתח פתק לפני העלאת תמונות."
+  },
+
+  "folders": {
+    "confirm_delete": "⚠️ אזהרה ⚠️\n\nהאם אתה בטוח שברצונך למחוק את התיקייה \"{{name}}\"?\n\nפעולה זו תמחק לצמיתות:\n• את כל הפתקים בתיקייה\n• את כל תתי-התיקיות והתוכן שלהן\n\nלא ניתן לבטל פעולה זו!",
+    "already_exists": "תיקייה בשם \"{{name}}\" כבר קיימת במיקום זה.\nבחר שם אחר.",
+    "prompt_name": "הזן שם תיקייה:",
+    "prompt_name_in_folder": "יצירת תת-תיקייה ב-\"{{folder}}\".\nהזן שם תיקייה:",
+    "prompt_name_with_path": "יצירת תיקייה חדשה.\nהזן נתיב תיקייה (לדוגמה: \"פרויקטים\" או \"עבודה/2025\"):",
+    "prompt_rename": "שנה שם תיקייה \"{{name}}\" ל:",
+    "invalid_name": "שם תיקייה לא חוקי.",
+    "cannot_move_into_self": "לא ניתן להעביר תיקייה לתוך עצמה או לתוך תת-תיקייה שלה.",
+    "empty": "ריקה"
+  },
+
+  "toolbar": {
+    "undo": "בטל (Ctrl+Z)",
+    "redo": "בצע שוב (Ctrl+Y)",
+    "delete_note": "מחק פתק",
+    "delete_image": "מחק תמונה",
+    "export_html": "ייצא כ-HTML",
+    "copy_link": "העתק קישור ללוח",
+    "add_favorite": "הוסף למועדפים",
+    "remove_favorite": "הסר ממועדפים"
+  },
+
+  "zen_mode": {
+    "title": "מצב זן",
+    "tooltip": "מצב זן (Ctrl+Alt+Z)",
+    "exit": "צא ממצב זן",
+    "exit_hint": "צא ממצב זן (Esc)"
+  },
+
+  "share": {
+    "button_tooltip": "שתף פתק",
+    "modal_title": "שיתוף פתק",
+    "not_shared_description": "פתק זה אינו משותף כרגע. צור קישור כדי לשתף אותו עם כל אחד.",
+    "shared_description": "כל מי שיש לו קישור זה יכול לצפות בפתק:",
+    "create_link": "צור קישור שיתוף",
+    "copy": "העתק",
+    "stop_sharing": "הפסק שיתוף",
+    "confirm_revoke": "האם אתה בטוח שברצונך להפסיק לשתף פתק זה? קישור השיתוף יפסיק לעבוד.",
+    "error_creating": "יצירת קישור שיתוף נכשלה: {{error}}",
+    "error_revoking": "ביטול שיתוף נכשל: {{error}}",
+    "show_qr": "הצג קוד QR",
+    "hide_qr": "הסתר קוד QR"
+  },
+
+  "quick_switcher": {
+    "placeholder": "הקלד כדי לחפש פתקים...",
+    "no_results": "לא נמצאו פתקים תואמים",
+    "recent_hint": "מציג פתקים אחרונים. הקלד כדי לחפש בכולם.",
+    "navigate": "ניווט",
+    "open": "פתח",
+    "close": "סגור"
+  },
+
+  "tags": {
+    "title": "תגיות",
+    "no_tags": "לא נמצאו תגיות",
+    "hint": "הוסף תגיות באמצעות YAML frontmatter",
+    "no_matches": "אין פתקים שתואמים לתגיות שנבחרו",
+    "clear_all": "נקה סינון תגיות",
+    "filter_by": "סנן לפי {{tag}} ({{count}} פתקים)"
+  },
+
+  "outline": {
+    "title": "מתאר",
+    "no_headings": "לא נמצאו כותרות",
+    "hint": "הוסף כותרות באמצעות תחביר #"
+  },
+
+  "stats": {
+    "words": "מילים",
+    "reading_time": "~{{minutes}} דקות קריאה",
+    "links": "{{count}} קישורים",
+    "click_details": "▼ לחץ לפרטים"
+  },
+
+  "graph": {
+    "title": "תצוגת גרף",
+    "empty": "אין קשרים להציג",
+    "markdown_links": "קישורי Markdown",
+    "click_hint": "לחיצה: בחר • לחיצה כפולה: פתח"
+  },
+
+  "templates": {
+    "title": "תבניות",
+    "select": "בחר תבנית...",
+    "prompt_name": "הזן שם פתק:",
+    "no_templates": "לא נמצאו תבניות. צור תבניות בתיקיית _templates.",
+    "create_failed": "יצירת פתק מתבנית נכשלה",
+    "create_from_template": "צור מתבנית",
+    "select_template": "בחר תבנית",
+    "choose_template": "בחר תבנית",
+    "note_name": "שם פתק",
+    "available_placeholders": "מציינים זמינים",
+    "create_note": "צור פתק"
+  },
+
+  "export": {
+    "failed": "ייצוא HTML נכשל: {{error}}"
+  },
+
+  "login": {
+    "title": "התחברות",
+    "tagline": "מאגר הידע האישי שלך",
+    "password_placeholder": "הזן סיסמה",
+    "unlock_button": "🔓 פתח",
+    "footer": "🔒 מאובטח ועצמאי",
+    "error_incorrect_password": "סיסמה שגויה. נסה שוב."
+  },
+
+  "media": {
+    "confirm_delete": "למחוק את \"{{name}}\"?",
+    "upload_failed": "העלאת קובץ נכשלה",
+    "no_valid_files": "לא נמצאו קבצים תקינים. נתמכים: JPG, PNG, GIF, WebP, MP3, MP4, PDF",
+    "formats": "JPG, PNG, GIF, WebP, MP3, MP4, PDF"
+  },
+
+  "move": {
+    "failed_note": "העברת פתק נכשלה.",
+    "failed_folder": "העברת תיקייה נכשלה.",
+    "failed_media": "העברת קובץ מדיה נכשלה."
+  },
+
+  "search": {
+    "previous": "הקודם (Shift+F3)",
+    "next": "הבא (F3)",
+    "matches": "{{current}} מתוך {{total}}",
+    "match_of": "התאמה {{current}} מתוך {{total}}",
+    "result_singular": "תוצאה",
+    "result_plural": "תוצאות",
+    "no_results": "אין פתקים שמכילים \"{{query}}\"",
+    "searching": "מחפש \"{{query}}\"..."
+  },
+
+  "theme": {
+    "title": "ערכת נושא"
+  },
+
+  "language": {
+    "title": "שפה"
+  },
+
+  "syntax_highlight": {
+    "title": "הדגשת תחביר בעורך",
+    "description": "צביעת תחביר Markdown בעורך",
+    "enable": "הפעל הדגשת תחביר",
+    "disable": "השבת הדגשת תחביר"
+  },
+
+  "settings": {
+    "account": "חשבון",
+    "logout": "התנתק",
+    "readable_line_length": "רוחב שורה קריא",
+    "readable_line_length_desc": "הגבל את רוחב התצוגה המקדימה לקריאה נוחה",
+    "hide_underscore_folders": "הסתר תיקיות מערכת",
+    "hide_underscore_folders_desc": "הסתר את _attachments, _templates ותיקיות קו תחתון נוספות מהסרגל הצדדי"
+  },
+
+  "homepage": {
+    "title": "דף הבית",
+    "welcome": "ברוכים הבאים ל-NoteDiscovery",
+    "get_started": "צור משהו כדי להתחיל",
+    "no_notes_title": "אין עדיין פתקים",
+    "no_notes_desc": "צור את הפתק או התיקייה הראשונים",
+    "folder_empty": "תיקייה זו ריקה",
+    "note_singular": "פתק",
+    "note_plural": "פתקים",
+    "folder_singular": "תיקייה",
+    "folder_plural": "תיקיות"
+  },
+
+  "format": {
+    "bold": "מודגש",
+    "italic": "נטוי",
+    "strikethrough": "קו חוצה",
+    "heading": "כותרת",
+    "link": "קישור",
+    "image": "תמונה",
+    "code": "קוד בשורה",
+    "codeblock": "בלוק קוד",
+    "quote": "ציטוט",
+    "bullet_list": "רשימת תבליטים",
+    "numbered_list": "רשימה ממוספרת",
+    "checkbox": "תיבת סימון",
+    "table": "טבלה"
+  },
+
+  "validation": {
+    "forbidden_chars": "השם מכיל תווים אסורים: {{chars}}",
+    "reserved_name": "שם זה שמור על ידי מערכת ההפעלה.",
+    "invalid_dot": "השם לא יכול להיות רק נקודה.",
+    "trailing_dot_space": "השם לא יכול להסתיים בנקודה או ברווח."
+  },
+
+  "support": {
+    "enjoying_demo": "תמכו בפרויקט",
+    "deploy_own": "התקינו מופע משלכם",
+    "thank_you": "תודה על התמיכה! 💚"
+  },
+
+  "demo": {
+    "title": "מצב הדגמה",
+    "warning": "התכנים מתאפסים מדי יום. שינויים עלולים להידרס על ידי משתמשים אחרים."
+  }
+}

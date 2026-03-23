@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html :lang="typeof currentLocale !== 'undefined' ? currentLocale : 'en'" :dir="typeof isRTL !== 'undefined' && isRTL ? 'rtl' : 'ltr'" lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -253,8 +253,8 @@
         /* Lists */
         .markdown-preview ul, .markdown-preview ol { 
             margin-bottom: 1rem;
-            margin-left: 1.5rem;
-            padding-left: 0.5rem;
+            margin-inline-start: 1.5rem;
+            padding-inline-start: 0.5rem;
         }
         .markdown-preview ul { list-style-type: disc; }
         .markdown-preview ol { list-style-type: decimal; }
@@ -298,14 +298,14 @@
         
         /* Blockquotes */
         .markdown-preview blockquote { 
-            border-left: 4px solid var(--accent-primary);
-            padding-left: 1rem;
+            border-inline-start: 4px solid var(--accent-primary);
+            padding-inline-start: 1rem;
             margin: 1.5rem 0;
             font-style: italic;
             color: var(--text-secondary);
             background-color: var(--bg-tertiary);
             padding: 1rem;
-            padding-left: 1rem;
+            padding-inline-start: 1rem;
             border-radius: 0.25rem;
         }
         .markdown-preview blockquote p {
@@ -395,7 +395,7 @@
         .graph-legend {
             position: absolute;
             top: 10px;
-            right: 10px;
+            inset-inline-end: 10px;
             padding: 8px 12px;
             border-radius: 8px;
             font-size: 12px;
@@ -430,7 +430,7 @@
         .markdown-preview th, .markdown-preview td { 
             border: 1px solid var(--border-primary);
             padding: 0.75rem 1rem;
-            text-align: left;
+            text-align: start;
         }
         .markdown-preview th { 
             background-color: var(--bg-tertiary);
@@ -544,7 +544,7 @@
         
         /* Task lists */
         .markdown-preview input[type="checkbox"] {
-            margin-right: 0.5rem;
+            margin-inline-end: 0.5rem;
         }
         
         /* Math/LaTeX styling */
@@ -670,7 +670,7 @@
         .zen-exit-button {
             position: fixed;
             bottom: 2rem;
-            right: 2rem;
+            inset-inline-end: 2rem;
             padding: 0.75rem 1.25rem;
             border-radius: 9999px;
             background-color: var(--bg-tertiary);
@@ -726,13 +726,13 @@
         .folder-item {
             user-select: none;
             border-radius: 6px;
-            border-left: 3px solid transparent;
-            margin-left: 2px;
+            border-inline-start: 3px solid transparent;
+            margin-inline-start: 2px;
         }
         
         .folder-item:hover {
             background-color: var(--bg-hover);
-            border-left-color: var(--accent-primary);
+            border-inline-start-color: var(--accent-primary);
         }
         
         .folder-item.drag-over {
@@ -746,39 +746,39 @@
         
         .note-item {
             border-radius: 6px;
-            border-left: 3px solid transparent;
-            margin-left: 2px;
+            border-inline-start: 3px solid transparent;
+            margin-inline-start: 2px;
         }
         
         .note-item:hover {
             background-color: var(--bg-hover);
-            border-left-color: var(--accent-primary);
+            border-inline-start-color: var(--accent-primary);
             transform: translateX(2px);
         }
         
         /* Active/selected note styling */
         .note-item.active,
         .note-item[style*="accent-light"] {
-            border-left-color: var(--accent-primary) !important;
+            border-inline-start-color: var(--accent-primary) !important;
             font-weight: 500;
         }
         
         /* Shared hover accent effect for list items */
         .hover-accent {
             border-radius: 6px;
-            border-left: 3px solid transparent;
-            margin-left: 2px;
+            border-inline-start: 3px solid transparent;
+            margin-inline-start: 2px;
             transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
         }
         
         .hover-accent:not(.active):hover {
             background-color: var(--bg-hover);
-            border-left-color: var(--accent-primary);
+            border-inline-start-color: var(--accent-primary);
             transform: translateX(2px);
         }
         
         .hover-accent.active {
-            border-left-color: var(--accent-primary);
+            border-inline-start-color: var(--accent-primary);
         }
         
         .hover-accent.active:hover {
@@ -787,12 +787,12 @@
         
         /* Tag chip - same effect but no margin */
         .tag-chip {
-            border-left: 3px solid transparent;
+            border-inline-start: 3px solid transparent;
             transition: border-color 0.15s ease, transform 0.1s ease;
         }
         
         .tag-chip:hover {
-            border-left-color: var(--accent-primary);
+            border-inline-start-color: var(--accent-primary);
             transform: translateX(2px);
         }
         
@@ -836,14 +836,14 @@
         /* Folder hierarchy lines (Obsidian-style) */
         .folder-contents {
             position: relative;
-            padding-left: 1rem;
-            margin-left: 0.5rem;
+            padding-inline-start: 1rem;
+            margin-inline-start: 0.5rem;
         }
         
         .folder-contents::before {
             content: '';
             position: absolute;
-            left: 2px;
+            inset-inline-start: 2px;
             top: 0;
             bottom: 0;
             width: 1px;
@@ -860,7 +860,7 @@
             align-items: center;
             padding: 8px 0;
             background-color: var(--bg-tertiary);
-            border-right: 1px solid var(--border-primary);
+            border-inline-end: 1px solid var(--border-primary);
         }
         
         .icon-rail-btn {
@@ -1221,19 +1221,19 @@
             /* Hide sidebar by default on mobile */
             .mobile-sidebar {
                 position: fixed;
-                left: -100%;
+                inset-inline-start: -100%;
                 top: 0;
                 height: 100vh;
                 height: 100dvh; /* Dynamic viewport height for iOS Safari */
                 width: 80% !important;
                 max-width: 300px !important;
                 z-index: 1000;
-                transition: left 0.3s ease;
+                transition: inset-inline-start 0.3s ease;
             }
             
             /* Show sidebar when open */
             .mobile-sidebar-open {
-                left: 0;
+                inset-inline-start: 0;
             }
             
             /* Add bottom padding to scrollable sidebar content for tab bar */
@@ -1331,6 +1331,31 @@
                 min-height: 140px;
             }
         }
+        
+        /* ==================== RTL Overrides ==================== */
+        /* Properties that cannot use CSS Logical Properties (translateX, gradients) */
+        [dir="rtl"] .note-item:hover {
+            transform: translateX(-2px);
+        }
+        [dir="rtl"] .hover-accent:not(.active):hover {
+            transform: translateX(-2px);
+        }
+        [dir="rtl"] .hover-accent.active:hover {
+            transform: translateX(-2px);
+        }
+        [dir="rtl"] .tag-chip:hover {
+            transform: translateX(-2px);
+        }
+        
+        /* RTL: Mirror directional icons (chevrons, arrows) */
+        [dir="rtl"] .rtl-mirror {
+            transform: scaleX(-1);
+        }
+        
+        /* RTL: Folder hover buttons gradient direction */
+        [dir="rtl"] .hover-buttons {
+            background: linear-gradient(to left, transparent, var(--bg-hover) 20%, var(--bg-hover)) !important;
+        }
     </style>
 </head>
 <body x-data="noteApp()" x-init="init()" style="background-color: var(--bg-primary);" :class="{'zen-mode-active': zenMode}">
@@ -1406,7 +1431,7 @@
                     <span 
                         x-show="searchQuery.trim() && searchResults.length > 0"
                         x-cloak
-                        class="absolute -top-1 -right-1 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
+                        class="absolute -top-1 -end-1 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
                         style="background-color: var(--accent-primary); color: white;"
                         x-text="searchResults.length > 9 ? '9+' : searchResults.length"
                     ></span>
@@ -1427,7 +1452,7 @@
                     <span 
                         x-show="selectedTags.length > 0"
                         x-cloak
-                        class="absolute -top-1 -right-1 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
+                        class="absolute -top-1 -end-1 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
                         style="background-color: var(--accent-primary); color: white;"
                         x-text="searchResults.length > 9 ? '9+' : searchResults.length"
                     ></span>
@@ -1448,7 +1473,7 @@
                     <span 
                         x-show="outline.length > 0"
                         x-cloak
-                        class="absolute -top-1 -right-1 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
+                        class="absolute -top-1 -end-1 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
                         style="background-color: var(--accent-primary); color: white;"
                         x-text="outline.length > 9 ? '9+' : outline.length"
                     ></span>
@@ -1485,7 +1510,7 @@
                     </div>
                     
             <!-- Sidebar Panel -->
-            <div class="sidebar-panel" style="border-right: 1px solid var(--border-primary);">
+            <div class="sidebar-panel" style="border-inline-end: 1px solid var(--border-primary);">
                 
                 <!-- ==================== FILES PANEL ==================== -->
                 <div x-show="activePanel === 'files'" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="flex flex-col h-full">
@@ -1502,7 +1527,7 @@
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
-                            New
+                            <span x-text="t('sidebar.new_button').replace('+ ', '')"></span>
                 </button>
             </div>
             
@@ -1542,7 +1567,7 @@
                                             <svg class="w-3.5 h-3.5 flex-shrink-0" style="color: var(--warning, #eab308);" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                                             </svg>
-                                            <span class="text-xs truncate" x-text="fav.name" :title="fav.name"></span>
+                                            <span class="text-xs truncate" dir="auto" x-text="fav.name" :title="fav.name"></span>
                                         </div>
                                         <button 
                                             @click.stop="toggleFavorite(fav.path)"
@@ -1638,19 +1663,20 @@
                         <div class="relative">
                             <input 
                                 type="text" 
+                                dir="auto"
                                 x-model="searchQuery"
                                 @input="debouncedSearchNotes()"
                                 :placeholder="t('sidebar.search_placeholder')"
-                                class="w-full px-2 py-1.5 pl-7 pr-7 text-xs rounded focus:outline-none focus:ring-1"
+                                class="w-full px-2 py-1.5 ps-7 pe-7 text-xs rounded focus:outline-none focus:ring-1"
                                 style="background-color: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-primary);"
                             >
-                            <svg class="absolute left-2 top-2 w-3.5 h-3.5" style="color: var(--text-tertiary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="absolute start-2 top-2 w-3.5 h-3.5" style="color: var(--text-tertiary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                             <button
                                 x-show="searchQuery.length > 0"
                                 @click="searchQuery = ''; searchResults = []; currentSearchHighlight = ''; clearSearchHighlights();"
-                                class="absolute right-1.5 top-1.5 w-4 h-4 flex items-center justify-center rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                                class="absolute end-1.5 top-1.5 w-4 h-4 flex items-center justify-center rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                                 style="color: var(--text-tertiary);"
                                 :title="t('sidebar.clear_search')"
                             >
@@ -1669,10 +1695,10 @@
                             <span x-text="t('search.match_of', { current: currentMatchIndex + 1, total: totalMatches })"></span>
                             <div class="flex gap-1">
                                 <button @click="previousMatch()" class="px-2 py-1 rounded hover:bg-opacity-80" style="background-color: var(--bg-primary); color: var(--text-primary);" :title="t('search.previous')">
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                    <svg class="w-3 h-3 rtl-mirror" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                                 </button>
                                 <button @click="nextMatch()" class="px-2 py-1 rounded hover:bg-opacity-80" style="background-color: var(--bg-primary); color: var(--text-primary);" :title="t('search.next')">
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <svg class="w-3 h-3 rtl-mirror" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                 </button>
                             </div>
                         </div>
@@ -1692,8 +1718,8 @@
                                         :class="{'active': currentNote === note.path}"
                                         :style="currentNote === note.path ? 'background-color: var(--accent-light); color: var(--accent-primary);' : 'color: var(--text-primary);'"
                                     >
-                                        <div class="font-medium truncate" x-text="note.name" :title="note.name"></div>
-                                        <div class="text-xs truncate" style="color: var(--text-tertiary);" x-html="(note.matches && note.matches.length > 0) ? note.matches[0].context : (note.folder || 'Root')" :title="note.folder || 'Root'"></div>
+                                        <div class="font-medium truncate" dir="auto" x-text="note.name" :title="note.name"></div>
+                                        <div class="text-xs truncate" dir="auto" style="color: var(--text-tertiary);" x-html="(note.matches && note.matches.length > 0) ? note.matches[0].context : (note.folder || 'Root')" :title="note.folder || 'Root'"></div>
                     </div>
                 </template>
             </div>
@@ -1761,7 +1787,7 @@
                                                 : 'background-color: var(--bg-tertiary); color: var(--text-primary);'"
                                             :title="t('tags.filter_by', {tag: tag, count: count})"
                                         >
-                                            <span x-text="tag"></span>
+                                            <span dir="auto" x-text="tag"></span>
                                             <span class="opacity-75" x-text="` (${count})`"></span>
                                         </button>
                                     </template>
@@ -1792,7 +1818,7 @@
                                             :class="{'active': currentNote === note.path}"
                                             :style="currentNote === note.path ? 'background-color: var(--accent-light); color: var(--accent-primary);' : 'color: var(--text-primary);'"
                                         >
-                                            <span class="truncate block" x-text="note.name" :title="note.name"></span>
+                                            <span class="truncate block" dir="auto" x-text="note.name" :title="note.name"></span>
                                         </div>
                                     </template>
                                     <div x-show="searchResults.length === 0" class="px-3 py-4 text-center text-xs" style="color: var(--text-tertiary);" x-text="t('tags.no_matches')">
@@ -1821,11 +1847,12 @@
                                     <template x-for="(heading, index) in outline" :key="index">
                                         <button 
                                             @click="scrollToHeading(heading)"
-                                            class="hover-accent w-full text-left px-3 py-1.5 text-sm"
-                                            :style="`padding-left: ${(heading.level - 1) * 12 + 12}px; color: var(--text-primary);`"
+                                            class="hover-accent w-full text-start px-3 py-1.5 text-sm"
+                                            :style="`padding-inline-start: ${(heading.level - 1) * 12 + 12}px; color: var(--text-primary);`"
                                         >
                                             <span 
                                                 class="block truncate"
+                                                dir="auto"
                                                 :style="heading.level === 1 ? 'font-weight: 600;' : (heading.level === 2 ? 'font-weight: 500;' : '')"
                                                 x-text="heading.text"
                                                 :title="heading.text"
@@ -1899,8 +1926,8 @@
                                             :style="syntaxHighlightEnabled ? 'background-color: var(--accent-primary)' : 'background-color: var(--bg-tertiary)'"
                                         >
                                             <div 
-                                                class="absolute top-0.5 left-0.5 w-4 h-4 rounded-full transition-transform"
-                                                :style="'background-color: var(--bg-primary);' + (syntaxHighlightEnabled ? ' transform: translateX(20px);' : '')"
+                                                class="absolute top-0.5 start-0.5 w-4 h-4 rounded-full transition-transform"
+                                                :style="'background-color: var(--bg-primary);' + (syntaxHighlightEnabled ? (isRTL ? ' transform: translateX(-20px);' : ' transform: translateX(20px);') : '')"
                                             ></div>
                                         </div>
                                     </label>
@@ -1917,8 +1944,8 @@
                                             :style="readableLineLength ? 'background-color: var(--accent-primary)' : 'background-color: var(--bg-tertiary)'"
                                         >
                                             <div 
-                                                class="absolute top-0.5 left-0.5 w-4 h-4 rounded-full transition-transform"
-                                                :style="'background-color: var(--bg-primary);' + (readableLineLength ? ' transform: translateX(20px);' : '')"
+                                                class="absolute top-0.5 start-0.5 w-4 h-4 rounded-full transition-transform"
+                                                :style="'background-color: var(--bg-primary);' + (readableLineLength ? (isRTL ? ' transform: translateX(-20px);' : ' transform: translateX(20px);') : '')"
                                             ></div>
                                         </div>
                                     </label>
@@ -1935,8 +1962,8 @@
                                             :style="hideUnderscoreFolders ? 'background-color: var(--accent-primary)' : 'background-color: var(--bg-tertiary)'"
                                         >
                                             <div 
-                                                class="absolute top-0.5 left-0.5 w-4 h-4 rounded-full transition-transform"
-                                                :style="'background-color: var(--bg-primary);' + (hideUnderscoreFolders ? ' transform: translateX(20px);' : '')"
+                                                class="absolute top-0.5 start-0.5 w-4 h-4 rounded-full transition-transform"
+                                                :style="'background-color: var(--bg-primary);' + (hideUnderscoreFolders ? (isRTL ? ' transform: translateX(-20px);' : ' transform: translateX(20px);') : '')"
                                             ></div>
                                         </div>
                                     </label>
@@ -2056,12 +2083,12 @@
                 <!-- Close button -->
                 <button 
                     @click="showGraph = false"
-                    class="absolute top-4 left-4 px-3 py-2 text-sm font-medium rounded-lg transition-colors z-10"
+                    class="absolute top-4 start-4 px-3 py-2 text-sm font-medium rounded-lg transition-colors z-10"
                     style="background-color: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-primary);"
                     onmouseover="this.style.backgroundColor='var(--bg-hover)'"
                     onmouseout="this.style.backgroundColor='var(--bg-secondary)'"
                 >
-                    ← Back
+                    <span x-text="isRTL ? 'Back →' : '← Back'"></span>
                 </button>
             </div>
             
@@ -2113,7 +2140,7 @@
                                 <p class="text-lg" style="color: var(--text-secondary);" x-text="t('app.tagline')"></p>
                                 <!-- Demo Mode Warning Banner -->
                                 <div x-show="demoMode" class="mt-4 flex items-center px-4 py-2.5 text-sm rounded-lg" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; font-weight: 500;">
-                                    <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 me-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                                     </svg>
                                     <span><strong x-text="t('demo.title') + ':'"></strong> <span x-text="t('demo.warning')"></span></span>
@@ -2133,6 +2160,7 @@
                                             <span 
                                                 @click="goToHomepageFolder(crumb.path)"
                                                 class="cursor-pointer hover:underline"
+                                                dir="auto"
                                                 :style="crumb.path === selectedHomepageFolder ? 'color: var(--accent-primary); font-weight: 600;' : 'color: var(--text-secondary);'"
                                                 x-text="crumb.name"
                                             ></span>
@@ -2155,7 +2183,7 @@
                                         </span>
                                         <button 
                                             @click="dropdownTargetFolder = selectedHomepageFolder; toggleNewDropdown($event)"
-                                            class="ml-auto px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors"
+                                            class="ms-auto px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors"
                                             style="background-color: var(--accent-primary);"
                                             onmouseover="this.style.backgroundColor='var(--accent-hover)'"
                                             onmouseout="this.style.backgroundColor='var(--accent-primary)'"
@@ -2202,7 +2230,7 @@
                                             <button 
                                                 @click.stop="deleteFolder(folder.path, folder.name)"
                                                 class="card-delete-btn hidden sm:block"
-                                                style="position: absolute; top: 8px; right: 8px; opacity: 0; transition: opacity 0.2s; color: var(--error); padding: 4px; border-radius: 4px; background-color: var(--bg-secondary);"
+                                                style="position: absolute; top: 8px; inset-inline-end: 8px; opacity: 0; transition: opacity 0.2s; color: var(--error); padding: 4px; border-radius: 4px; background-color: var(--bg-secondary);"
                                                 onmouseover="this.style.backgroundColor='var(--bg-hover)'"
                                                 onmouseout="this.style.backgroundColor='var(--bg-secondary)'"
                                                 :title="t('common.delete')"
@@ -2217,13 +2245,13 @@
                                                 <svg class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" style="color: var(--accent-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
                                                 </svg>
-                                                <h3 class="font-semibold text-sm sm:text-base" style="color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-text="folder.name"></h3>
+                                                <h3 class="font-semibold text-sm sm:text-base" dir="auto" style="color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-text="folder.name"></h3>
                                             </div>
                                             
                                             <!-- Folder Metadata -->
                                             <div class="flex items-center justify-between text-xs mt-auto pt-1 sm:pt-2" style="color: var(--text-tertiary);">
                                                 <span x-text="folder.noteCount + ' ' + (folder.noteCount === 1 ? t('homepage.note_singular') : t('homepage.note_plural'))"></span>
-                                                <svg class="w-4 h-4 hidden sm:block" style="color: var(--accent-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-4 h-4 hidden sm:block rtl-mirror" style="color: var(--accent-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                                 </svg>
                                             </div>
@@ -2243,7 +2271,7 @@
                                             <button 
                                                 @click.stop="note.type !== 'note' ? deleteMedia(note.path) : deleteNote(note.path, note.name)"
                                                 class="card-delete-btn hidden sm:block"
-                                                style="position: absolute; top: 8px; right: 8px; opacity: 0; transition: opacity 0.2s; color: var(--error); padding: 4px; border-radius: 4px; background-color: var(--bg-secondary);"
+                                                style="position: absolute; top: 8px; inset-inline-end: 8px; opacity: 0; transition: opacity 0.2s; color: var(--error); padding: 4px; border-radius: 4px; background-color: var(--bg-secondary);"
                                                 onmouseover="this.style.backgroundColor='var(--bg-hover)'"
                                                 onmouseout="this.style.backgroundColor='var(--bg-secondary)'"
                                                 :title="note.type !== 'note' ? t('toolbar.delete_image') : t('toolbar.delete_note')"
@@ -2254,7 +2282,7 @@
                                             </button>
                                             
                                             <!-- Note Title -->
-                                            <h3 class="font-semibold text-sm sm:text-base mb-1 sm:mb-2" style="color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-text="note.name"></h3>
+                                            <h3 class="font-semibold text-sm sm:text-base mb-1 sm:mb-2" dir="auto" style="color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-text="note.name"></h3>
                                             
                                             <!-- Metadata -->
                                             <div class="flex items-center justify-between text-xs mt-auto pt-1 sm:pt-2" style="color: var(--text-tertiary);">
@@ -2282,7 +2310,7 @@
                 <div class="flex-1 flex flex-col overflow-hidden" :class="{'zen-editor-container': zenMode}" style="background-color: var(--bg-primary);">
                     <!-- Toolbar -->
                     <div class="px-4 py-3 flex items-center justify-between mobile-toolbar zen-hide" style="background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-primary);">
-                        <div class="flex items-center space-x-2">
+                        <div class="flex items-center gap-2">
                             <!-- Mobile Menu Button -->
                             <button 
                                 @click="mobileSidebarOpen = !mobileSidebarOpen"
@@ -2298,6 +2326,7 @@
                             </button>
                             <input 
                                 type="text" 
+                                dir="auto"
                                 :value="currentNote ? currentNoteName : (currentMedia ? currentMedia.split('/').pop() : '')"
                                 @input="if (currentNote) currentNoteName = $event.target.value"
                                 @blur="if (currentNote) renameNote()"
@@ -2355,13 +2384,13 @@
                         
                         <!-- Demo Mode Warning Banner -->
                         <div x-show="demoMode" class="flex items-center px-3 py-1.5 text-xs rounded-lg" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: white; font-weight: 500;">
-                            <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 me-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                             </svg>
                             <span><strong x-text="t('demo.title') + ':'"></strong> <span x-text="t('demo.warning')"></span></span>
                         </div>
                         
-                        <div class="flex items-center space-x-2" x-show="currentNote">
+                        <div class="flex items-center gap-2" x-show="currentNote">
                             <!-- View Toggle (only for notes) -->
                             <div class="flex rounded-lg p-1" style="background-color: var(--bg-tertiary);">
                                 <button 
@@ -2541,11 +2570,13 @@
                                 <div 
                                     id="syntax-overlay"
                                     class="syntax-overlay"
+                                    dir="auto"
                                     x-show="syntaxHighlightEnabled"
                                     x-html="syntaxHighlightEnabled ? highlightMarkdown(noteContent) : ''"
                                 ></div>
                                 <textarea 
                                     id="note-editor"
+                                    dir="auto"
                                     x-model="noteContent"
                                     @input="autoSave(); updateSyntaxHighlight()"
                                     @scroll="syncOverlayScroll()"
@@ -2600,6 +2631,7 @@
                                         <span 
                                             @click.stop="toggleTag(tag.toLowerCase())"
                                             class="metadata-tag px-2 py-0.5 text-xs rounded-full cursor-pointer transition-colors"
+                                            dir="auto"
                                             style="background-color: var(--accent-light, rgba(124, 58, 237, 0.15)); color: var(--accent-primary);"
                                             onmouseover="this.style.backgroundColor='var(--accent-primary)'; this.style.color='white'"
                                             onmouseout="this.style.backgroundColor='var(--accent-light, rgba(124, 58, 237, 0.15))'; this.style.color='var(--accent-primary)'"
@@ -2615,12 +2647,12 @@
                                         <span class="text-xs flex items-center gap-1" style="color: var(--text-secondary);">
                                             <span class="opacity-50">·</span>
                                             <span class="capitalize" x-text="field.key + ':'"></span>
-                                            <span style="color: var(--text-primary);" x-html="field.valueHtml" @click="field.isUrl && $event.stopPropagation()"></span>
+                                            <span dir="auto" style="color: var(--text-primary);" x-html="field.valueHtml" @click="field.isUrl && $event.stopPropagation()"></span>
                                         </span>
                                     </template>
                                     
                                     <!-- Expand hint -->
-                                    <span class="ml-auto text-xs opacity-40">▼</span>
+                                    <span class="ms-auto text-xs opacity-40">▼</span>
                                 </div>
                                 
                                 <!-- Expanded View -->
@@ -2652,6 +2684,7 @@
                                                         <span 
                                                             @click="toggleTag(tag.toLowerCase())"
                                                             class="metadata-tag px-2 py-0.5 text-xs rounded-full cursor-pointer transition-colors"
+                                                            dir="auto"
                                                             style="background-color: var(--accent-light, rgba(124, 58, 237, 0.15)); color: var(--accent-primary);"
                                                             onmouseover="this.style.backgroundColor='var(--accent-primary)'; this.style.color='white'"
                                                             onmouseout="this.style.backgroundColor='var(--accent-light, rgba(124, 58, 237, 0.15))'; this.style.color='var(--accent-primary)'"
@@ -2672,6 +2705,7 @@
                                                         <template x-for="item in field.value" :key="item">
                                                             <span 
                                                                 class="px-1.5 py-0.5 rounded text-xs"
+                                                                dir="auto"
                                                                 style="background-color: var(--bg-hover); color: var(--text-primary);"
                                                                 x-text="item"
                                                             ></span>
@@ -2680,7 +2714,7 @@
                                                 </template>
                                                 <!-- Single values -->
                                                 <template x-if="!field.isArray">
-                                                    <span style="color: var(--text-primary);" x-html="field.valueHtml"></span>
+                                                    <span dir="auto" style="color: var(--text-primary);" x-html="field.valueHtml"></span>
                                                 </template>
                                             </div>
                                         </template>
@@ -2690,6 +2724,7 @@
                             
                             <div 
                                 class="p-6 markdown-preview"
+                                dir="auto"
                                 :class="{ 'pt-2': getHasMetadata() && currentNote, 'readable-width': readableLineLength }"
                                 x-html="renderedMarkdown"
                                 @click="handleInternalLink($event)"
@@ -2760,7 +2795,7 @@
                              class="px-4 py-2 flex items-center justify-between cursor-pointer hover:bg-opacity-80 transition-colors"
                              onmouseover="this.style.backgroundColor='var(--bg-hover)'"
                              onmouseout="this.style.backgroundColor='transparent'">
-                            <div class="flex items-center space-x-4 text-sm" style="color: var(--text-secondary);">
+                            <div class="flex items-center gap-4 text-sm" style="color: var(--text-secondary);">
                                 <span class="font-medium">📊</span>
                                 <span x-text="noteStats ? noteStats.words.toLocaleString() + ' words' : ''"></span>
                                 <span>·</span>
@@ -2911,7 +2946,7 @@
         <div class="py-1">
             <button 
                 @click="createNote()"
-                class="w-full px-4 py-2.5 text-sm text-left flex items-center gap-3 transition-colors"
+                class="w-full px-4 py-2.5 text-sm text-start flex items-center gap-3 transition-colors"
                 style="color: var(--text-primary);"
                 onmouseover="this.style.backgroundColor='var(--bg-hover)'"
                 onmouseout="this.style.backgroundColor='transparent'"
@@ -2921,7 +2956,7 @@
             </button>
             <button 
                 @click="createFolder()"
-                class="w-full px-4 py-2.5 text-sm text-left flex items-center gap-3 transition-colors"
+                class="w-full px-4 py-2.5 text-sm text-start flex items-center gap-3 transition-colors"
                 style="color: var(--text-primary);"
                 onmouseover="this.style.backgroundColor='var(--bg-hover)'"
                 onmouseout="this.style.backgroundColor='transparent'"
@@ -2931,7 +2966,7 @@
             </button>
             <button 
                 @click.stop="showTemplateModal = true; showNewDropdown = false; mobileSidebarOpen = false"
-                class="w-full px-4 py-2.5 text-sm text-left flex items-center gap-3 transition-colors"
+                class="w-full px-4 py-2.5 text-sm text-start flex items-center gap-3 transition-colors"
                 style="color: var(--text-primary);"
                 onmouseover="this.style.backgroundColor='var(--bg-hover)'"
                 onmouseout="this.style.backgroundColor='transparent'"
@@ -2961,6 +2996,7 @@
                 </label>
                 <select 
                     x-model="selectedTemplate"
+                    dir="auto"
                     class="w-full px-3 py-2 rounded border"
                     style="background-color: var(--bg-tertiary); color: var(--text-primary); border-color: var(--border-primary);"
                 >
@@ -2978,6 +3014,7 @@
                 <input 
                     x-model="newTemplateNoteName"
                     type="text"
+                    dir="auto"
                     :placeholder="t('notes.prompt_name')"
                     class="w-full px-3 py-2 rounded border"
                     style="background-color: var(--bg-tertiary); color: var(--text-primary); border-color: var(--border-primary);"
@@ -3044,6 +3081,7 @@
             <div class="p-3 border-b" style="border-color: var(--border-primary);">
                 <input id="quickSwitcherInput"
                        type="text"
+                       dir="auto"
                        x-model="quickSwitcherQuery"
                        @keydown="handleQuickSwitcherKeydown($event)"
                        :placeholder="t('quick_switcher.placeholder')"
@@ -3071,8 +3109,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                         <div class="flex-1 min-w-0">
-                            <div class="font-medium truncate" style="color: var(--text-primary);" x-text="note.name" :title="note.name"></div>
-                            <div class="text-xs truncate" style="color: var(--text-secondary);" x-show="note.folder" x-text="note.folder" :title="note.folder"></div>
+                            <div class="font-medium truncate" dir="auto" style="color: var(--text-primary);" x-text="note.name" :title="note.name"></div>
+                            <div class="text-xs truncate" dir="auto" style="color: var(--text-secondary);" x-show="note.folder" x-text="note.folder" :title="note.folder"></div>
                         </div>
                     </div>
                 </template>
@@ -3250,7 +3288,7 @@
             <span 
                 x-show="searchQuery.trim() && searchResults.length > 0"
                 x-cloak
-                class="absolute top-1 right-1/4 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
+                class="absolute top-1 end-1/4 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
                 style="background-color: var(--accent-primary); color: white;"
                 x-text="searchResults.length > 9 ? '9+' : searchResults.length"
             ></span>
@@ -3269,7 +3307,7 @@
             <span 
                 x-show="selectedTags.length > 0"
                 x-cloak
-                class="absolute top-1 right-1/4 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
+                class="absolute top-1 end-1/4 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
                 style="background-color: var(--accent-primary); color: white;"
                 x-text="searchResults.length > 9 ? '9+' : searchResults.length"
             ></span>

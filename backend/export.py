@@ -300,7 +300,8 @@ def generate_export_html(
     title: str,
     content: str,
     theme_css: str,
-    is_dark: bool = False
+    is_dark: bool = False,
+    locale: str = 'en-US'
 ) -> str:
     """
     Generate a standalone HTML document for a note.
@@ -327,8 +328,12 @@ def generate_export_html(
     highlight_theme = 'github-dark' if is_dark else 'github'
     mermaid_theme = 'dark' if is_dark else 'default'
     
+    # RTL support
+    rtl_locales = ['he-IL', 'ar-SA', 'ar-EG', 'fa-IR', 'ur-PK']
+    dir_attr = 'rtl' if locale in rtl_locales else 'ltr'
+    
     html = f'''<!DOCTYPE html>
-<html lang="en">
+<html lang="{locale}" dir="{dir_attr}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -424,8 +429,7 @@ def generate_export_html(
             margin: 0;
             padding: 2rem;
             max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-inline: auto;
             background-color: var(--bg-primary, #ffffff);
             color: var(--text-primary, #333333);
         }}
@@ -504,13 +508,13 @@ def generate_export_html(
         .markdown-preview blockquote {{
             margin: 1em 0;
             padding: 0 1em;
-            border-left: 4px solid var(--accent-primary, #0366d6);
+            border-inline-start: 4px solid var(--accent-primary, #0366d6);
             color: var(--text-secondary, #6a737d);
         }}
         
         .markdown-preview ul,
         .markdown-preview ol {{
-            padding-left: 2em;
+            padding-inline-start: 2em;
             margin: 1em 0;
         }}
         
@@ -528,7 +532,7 @@ def generate_export_html(
         .markdown-preview td {{
             border: 1px solid var(--border-color, #e1e4e8);
             padding: 0.5em 1em;
-            text-align: left;
+            text-align: start;
         }}
         
         .markdown-preview th {{
@@ -544,7 +548,7 @@ def generate_export_html(
         
         /* Task list styling */
         .markdown-preview input[type="checkbox"] {{
-            margin-right: 0.5em;
+            margin-inline-end: 0.5em;
         }}
         
         /* Enhanced Shell/Bash Syntax Highlighting */
@@ -627,7 +631,7 @@ def generate_export_html(
         .copy-btn {{
             position: absolute;
             top: 0.5rem;
-            right: 0.5rem;
+            inset-inline-end: 0.5rem;
             padding: 0.25rem 0.5rem;
             font-size: 0.75rem;
             background-color: var(--bg-secondary, #e1e4e8);

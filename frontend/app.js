@@ -204,6 +204,12 @@ function noteApp() {
         // Translations loaded from backend (preloaded before Alpine init via window.__preloadedTranslations)
         translations: window.__preloadedTranslations || {},
         
+        // RTL support
+        RTL_LOCALES: ['he-IL', 'ar-SA', 'ar-EG', 'fa-IR', 'ur-PK'],
+        get isRTL() {
+            return this.RTL_LOCALES.includes(this.currentLocale);
+        },
+        
         // Syntax highlighting
         syntaxHighlightEnabled: false,
         syntaxHighlightTimeout: null,
@@ -484,6 +490,7 @@ function noteApp() {
             await this.loadAvailableLocales();
             // Note: Translations are preloaded synchronously before Alpine init (see index.html)
             // loadLocale() is only called when user changes language from settings
+            this.applyDocumentDirection();
             await this.loadNotes();
             await this.loadSharedNotePaths();
             await this.loadTemplates();
@@ -1083,6 +1090,14 @@ function noteApp() {
         // Change locale and reload translations
         async changeLocale(localeCode) {
             await this.loadLocale(localeCode);
+            this.applyDocumentDirection();
+        },
+        
+        // Apply RTL/LTR direction to document based on current locale
+        applyDocumentDirection() {
+            const dir = this.isRTL ? 'rtl' : 'ltr';
+            document.documentElement.setAttribute('dir', dir);
+            document.documentElement.setAttribute('lang', this.currentLocale);
         },
         
         // ==================== END INTERNATIONALIZATION ====================
@@ -1880,18 +1895,18 @@ function noteApp() {
                         <div class="flex items-center gap-1">
                             <button 
                                 class="flex-shrink-0 w-4 h-4 flex items-center justify-center"
-                                style="color: var(--text-tertiary); cursor: pointer; transition: transform 0.2s; pointer-events: none; margin-left: -5px; ${isExpanded ? 'transform: rotate(90deg);' : ''}"
+                                style="color: var(--text-tertiary); cursor: pointer; transition: transform 0.2s; pointer-events: none; margin-inline-start: -5px; ${isExpanded ? 'transform: rotate(90deg);' : ''}"
                             >
                                 <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
                                     <path d="M6 4l4 4-4 4V4z"/>
                                 </svg>
                             </button>
                             <span class="flex items-center gap-1 flex-1" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; pointer-events: none;" title="${esc(folder.name)}">
-                                <span>${esc(folder.name)}</span>
+                                <span dir="auto">${esc(folder.name)}</span>
                                 ${folder.notes.length === 0 && (!folder.children || Object.keys(folder.children).length === 0) ? `<span class="text-xs" style="color: var(--text-tertiary); font-weight: 400;">(${this.t('folders.empty')})</span>` : ''}
                             </span>
                         </div>
-                        <div class="hover-buttons flex gap-1 transition-opacity absolute right-2 top-1/2 transform -translate-y-1/2" style="opacity: 0; pointer-events: none; background: linear-gradient(to right, transparent, var(--bg-hover) 20%, var(--bg-hover)); padding-left: 20px;" onclick="event.stopPropagation()">
+                        <div class="hover-buttons flex gap-1 transition-opacity absolute end-2 top-1/2 transform -translate-y-1/2" style="opacity: 0; pointer-events: none; background: linear-gradient(to right, transparent, var(--bg-hover) 20%, var(--bg-hover)); padding-inline-start: 20px;" onclick="event.stopPropagation()">
                             <button 
                                 data-path="${esc(folder.path)}"
                                 onclick="window.$root.handleNewItemClick(this, event)"
@@ -1925,7 +1940,7 @@ function noteApp() {
             
             // If expanded, render folder contents (child folders + notes)
             if (isExpanded) {
-                html += `<div class="folder-contents" style="padding-left: 10px;">`;
+                html += `<div class="folder-contents" style="padding-inline-start: 10px;">`;
                 
                 // First, render child folders (if any)
                 if (folder.children && Object.keys(folder.children).length > 0) {
@@ -1962,7 +1977,7 @@ function noteApp() {
             
             // Share icon for shared notes
             const isShared = !isMediaFile && this.isNoteShared(note.path);
-            const shareIcon = isShared ? '<svg title="Shared" style="display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 2px; opacity: 0.7;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>' : '';
+            const shareIcon = isShared ? '<svg title="Shared" style="display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-inline-end: 2px; opacity: 0.7;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>' : '';
             const icon = this.getMediaIcon(note.type);
             
             return `
@@ -1979,13 +1994,13 @@ function noteApp() {
                     onmouseover="window.$root.handleItemHover(this, true)"
                     onmouseout="window.$root.handleItemHover(this, false)"
                 >
-                    <span class="truncate" style="display: block; padding-right: 30px;" title="${esc(note.name)}">${shareIcon}${icon}${icon ? ' ' : ''}${esc(note.name)}</span>
+                    <span class="truncate" dir="auto" style="display: block; padding-inline-end: 30px;" title="${esc(note.name)}">${shareIcon}${icon}${icon ? ' ' : ''}${esc(note.name)}</span>
                     <button 
                         data-path="${esc(note.path)}"
                         data-name="${esc(note.name)}"
                         data-type="${note.type}"
                         onclick="window.$root.handleDeleteItemClick(this, event)"
-                        class="note-delete-btn absolute right-2 top-1/2 transform -translate-y-1/2 px-1 py-0.5 text-xs rounded hover:brightness-110 transition-opacity"
+                        class="note-delete-btn absolute end-2 top-1/2 transform -translate-y-1/2 px-1 py-0.5 text-xs rounded hover:brightness-110 transition-opacity"
                         style="opacity: 0; color: var(--error);"
                         title="${isMediaFile ? 'Delete file' : 'Delete note'}"
                     >
@@ -3969,7 +3984,7 @@ function noteApp() {
                         console.error('Mermaid rendering error:', error);
                         // Add error indicator to the code block
                         const errorMsg = document.createElement('div');
-                        errorMsg.style.cssText = 'color: var(--error); padding: 10px; border-left: 3px solid var(--error); margin-top: 10px;';
+                        errorMsg.style.cssText = 'color: var(--error); padding: 10px; border-inline-start: 3px solid var(--error); margin-top: 10px;';
                         errorMsg.textContent = `⚠️ Mermaid diagram error: ${error.message}`;
                         pre.parentElement.insertBefore(errorMsg, pre.nextSibling);
                     }
@@ -4331,7 +4346,7 @@ function noteApp() {
             // Style the button
             button.style.position = 'absolute';
             button.style.top = '8px';
-            button.style.right = '8px';
+            button.style.insetInlineEnd = '8px';
             button.style.padding = '4px 10px';
             button.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
             button.style.border = 'none';
@@ -4890,8 +4905,9 @@ function noteApp() {
             const resize = (e) => {
                 if (!this.isResizing) return;
                 
-                // Calculate new width based on mouse position
-                const newWidth = e.clientX;
+                // Calculate new width based on mouse position (RTL-aware)
+                const isRTL = document.documentElement.dir === 'rtl';
+                const newWidth = isRTL ? (window.innerWidth - e.clientX) : e.clientX;
                 
                 // Clamp between min and max
                 if (newWidth >= 200 && newWidth <= 600) {
@@ -4924,7 +4940,10 @@ function noteApp() {
                 
                 const containerRect = container.getBoundingClientRect();
                 const mouseX = e.clientX - containerRect.left;
-                const percentage = (mouseX / containerRect.width) * 100;
+                let percentage = (mouseX / containerRect.width) * 100;
+                // In RTL, editor is on the right, so invert the percentage
+                const isRTL = document.documentElement.dir === 'rtl';
+                if (isRTL) percentage = 100 - percentage;
                 
                 // Clamp between 20% and 80%
                 if (percentage >= 20 && percentage <= 80) {
@@ -5154,8 +5173,9 @@ function noteApp() {
                 }
                 
                 // Create standalone HTML document with MathJax
+                const exportDir = this.isRTL ? 'rtl' : 'ltr';
                 const htmlDocument = `<!DOCTYPE html>
-<html lang="en">
+<html lang="${this.currentLocale}" dir="${exportDir}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -5246,8 +5266,7 @@ function noteApp() {
             margin: 0;
             padding: 2rem;
             max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-inline: auto;
             background-color: var(--bg-primary);
             color: var(--text-primary);
         }

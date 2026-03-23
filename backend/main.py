@@ -1642,11 +1642,15 @@ async def view_shared_note(request: Request, token: str):
         title = Path(note_path).stem
         
         # Generate HTML
+        # Get locale from query parameter or cookie for RTL support
+        locale = request.query_params.get('locale', request.cookies.get('locale', 'en-US'))
+        
         html_content = generate_export_html(
             title=title,
             content=content_with_links,
             theme_css=theme_css,
-            is_dark=is_dark
+            is_dark=is_dark,
+            locale=locale
         )
         
         return HTMLResponse(content=html_content)
